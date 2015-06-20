@@ -1,20 +1,32 @@
 classes:
- - apt
  - apache
- - icingaweb2
+ - apt
  - icinga2::server
+ - icingaweb2
  - mysql::server
-apt::apt_update_frequency: daily
+
 apache::mpm_module: prefork
-mysql::server::root_password: password
-mysql::server::remove_default_accounts: true
-icingaweb2::install_method: package
-icingaweb2::pkg_repo_version: snapshot
-icingaweb2::manage_apache_vhost: true
-icingaweb2::ido_db_user: root
-icingaweb2::ido_db_pass: password
-icingaweb2::web_db_user: root
-icingaweb2::web_db_pass: password
+
+apt::apt_update_frequency: daily
+
 icinga2::server::server_db_type: mysql
 icinga2::server::db_user: root
 icinga2::server::db_password: password
+icinga2::server::server_enabled_features:
+ - 'checker'
+ - 'notification'
+ - 'ido-mysql'
+
+icingaweb2::config_dir_mode: '0775'
+icingaweb2::install_method: package
+icingaweb2::pkg_repo_version: snapshot
+icingaweb2::manage_apache_vhost: true
+icingaweb2::ido_db_name: icinga2_data
+icingaweb2::ido_db_user: root
+icingaweb2::ido_db_pass: password
+icingaweb2::web_db_name: icinga2_web
+icingaweb2::web_db_user: root
+icingaweb2::web_db_pass: password
+
+mysql::server::root_password: password
+mysql::server::remove_default_accounts: true

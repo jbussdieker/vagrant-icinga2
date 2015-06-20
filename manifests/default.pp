@@ -22,6 +22,11 @@ mysql::db { 'icinga2_data':
   password => 'icinga2',
 }
 
+mysql::db { 'icinga2_web':
+  user     => 'icinga2',
+  password => 'icinga2',
+}
+
 icinga2::object::host { 'blah.com':
   display_name => 'blah.com',
   ipv4_address => '127.0.0.1',
@@ -34,3 +39,29 @@ icinga2::object::host { 'blah.com':
   target_dir => '/etc/icinga2/objects/hosts',
   target_file_name => "blah.com.conf"
 }
+
+file { '/etc/icingaweb2/modules/monitoring':
+  ensure => directory,
+  owner  => 'icingaweb2',
+  group  => 'icingaweb2',
+  mode   => '0775',
+}
+
+file { '/etc/icinga2/features-available/ido-mysql.conf':
+  ensure  => present,
+  content => '/**
+ * The db_ido_mysql library implements IDO functionality
+ * for MySQL.
+ */
+
+library "db_ido_mysql"
+
+object IdoMysqlConnection "ido-mysql" {
+  host = "localhost",
+  user = "root",
+  password = "password",
+  database = "icinga2_data"
+}
+',
+}
+
