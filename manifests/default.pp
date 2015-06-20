@@ -46,22 +46,3 @@ file { '/etc/icingaweb2/modules/monitoring':
   group  => 'icingaweb2',
   mode   => '0775',
 }
-
-file { '/etc/icinga2/features-available/ido-mysql.conf':
-  ensure  => present,
-  content => '/**
- * The db_ido_mysql library implements IDO functionality
- * for MySQL.
- */
-
-library "db_ido_mysql"
-
-object IdoMysqlConnection "ido-mysql" {
-  host = "localhost",
-  user = "root",
-  password = "password",
-  database = "icinga2_data"
-}
-',
-}
-
