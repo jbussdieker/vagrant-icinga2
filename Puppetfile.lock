@@ -1,12 +1,6 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    icinga-icingaweb2 (1.0.3)
-      puppetlabs-apache (>= 1.2.0)
-      puppetlabs-concat (>= 1.2.0)
-      puppetlabs-inifile (>= 1.2.0)
-      puppetlabs-stdlib (>= 4.4.0)
-      puppetlabs-vcsrepo (>= 1.2.0)
     nanliu-staging (1.0.3)
     puppetlabs-apache (1.5.0)
       puppetlabs-concat (< 2.0.0, >= 1.1.1)
@@ -32,6 +26,18 @@ GIT
     icinga-icinga2 (0.6.1)
       puppetlabs-apt (>= 1.5.2)
       puppetlabs-stdlib (>= 4.3.2)
+
+GIT
+  remote: git://github.com/jbussdieker/puppet-icingaweb2.git
+  ref: develop
+  sha: 236d009a4351acfefd071ad3fed39b80ddf7abc6
+  specs:
+    icinga-icingaweb2 (1.0.3)
+      puppetlabs-apache (>= 1.2.0)
+      puppetlabs-concat (>= 1.2.0)
+      puppetlabs-inifile (>= 1.2.0)
+      puppetlabs-stdlib (>= 4.4.0)
+      puppetlabs-vcsrepo (>= 1.2.0)
 
 DEPENDENCIES
   icinga-icinga2 (>= 0)
