@@ -18,11 +18,15 @@ class icinga {
   mysql::db { 'icinga2_data':
     user     => 'icinga2',
     password => 'icinga2',
+    sql      => '/usr/share/icinga2-ido-mysql/schema/mysql.sql',
+    require  => Package['icinga2'],
   }
 
   mysql::db { 'icinga2_web':
     user     => 'icinga2',
     password => 'icinga2',
+    sql      => '/usr/share/icingaweb2/etc/schema/mysql.schema.sql',
+    require  => Package['icingaweb2'],
   }
 
   class { 'apache':
