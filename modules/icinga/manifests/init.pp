@@ -22,6 +22,7 @@ class icinga(
     mpm_module   => 'prefork',
     default_mods => [
       'rewrite',
+      'env',
     ],
   }
 
