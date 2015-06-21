@@ -19,10 +19,11 @@ class icinga(
 
   ### APACHE CONFIG ###
   class { 'apache':
-    mpm_module => 'prefork',
+    mpm_module   => 'prefork',
+    default_mods => [
+      'rewrite',
+    ],
   }
-
-  apache::mod { 'rewrite': }
 
   class {'::apache::mod::php': }
 
