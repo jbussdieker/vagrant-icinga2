@@ -1,7 +1,8 @@
 classes:
  - apache
  - apt
- - icinga2::server
+ - icinga2
+ - icinga2::feature::ido_mysql
  - icingaweb2
  - mysql::server
 
@@ -9,13 +10,8 @@ apache::mpm_module: prefork
 
 apt::apt_update_frequency: daily
 
-icinga2::server::server_db_type: mysql
-icinga2::server::db_user: root
-icinga2::server::db_password: password
-icinga2::server::server_enabled_features:
- - 'checker'
- - 'notification'
- - 'ido-mysql'
+icinga2::db_user: root
+icinga2::db_password: password
 
 icingaweb2::config_dir_mode: '0775'
 icingaweb2::install_method: package
