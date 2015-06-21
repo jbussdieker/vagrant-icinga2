@@ -70,6 +70,14 @@ class icinga {
     remove_default_accounts => true,
   }
 
+  file { '/etc/icingaweb2/modules/monitoring':
+    ensure  => directory,
+    mode    => '0775',
+    owner   => 'icingaweb2',
+    group   => 'icingaweb2',
+    require => Package['icingaweb2'],
+  }
+
   file { '/etc/icingaweb2/modules/monitoring/backends.ini':
     ensure  => present,
     owner   => 'icingaweb2',
@@ -82,6 +90,12 @@ class icinga {
     owner   => 'icingaweb2',
     group   => 'icingaweb2',
     content => template('icinga/instances.ini'),
+  }
+
+  file { '/etc/icingaweb2/enabledModules/monitoring':
+    ensure  => link,
+    target  => '/usr/share/icingaweb2/modules/monitoring',
+    require => Package['icingaweb2'],
   }
 
 }
