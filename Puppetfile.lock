@@ -21,7 +21,7 @@ FORGE
 GIT
   remote: git://github.com/jbussdieker/puppet-icinga2.git
   ref: develop
-  sha: c8f64df17722610b6195ea2630a242fcf25b0956
+  sha: 5207f428f3285bb1542ced42e1e22d41f9047fb8
   specs:
     icinga-icinga2 (0.6.1)
       puppetlabs-apt (>= 1.5.2)
