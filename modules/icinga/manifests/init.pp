@@ -1,7 +1,9 @@
 class icinga(
-  $db_type     = 'mysql',
-  $db_user     = 'root',
-  $db_password = 'password',
+  $db_type        = 'mysql',
+  $db_user        = 'root',
+  $db_password    = 'password',
+  $admin_user     = 'admin',
+  $admin_password = '\$1\$usghGMNC\$h8Lk.QA8OUSvEkz45o.0u1'
 ) {
 
   Exec['apt_update'] -> Package <||>
@@ -56,6 +58,7 @@ class icinga(
     install_method      => 'package',
     pkg_repo_version    => 'snapshot',
     manage_apache_vhost => true,
+    admin_users         => $admin_user,
     ido_db              => $db_type,
     ido_db_name         => 'icinga2_data',
     ido_db_user         => $db_user,
@@ -121,11 +124,8 @@ class icinga(
       notify   => Exec['create_web_user'],
     }
 
-    $default_user = 'icingaadmin'
-    $default_password = '\$1\$usghGMNC\$h8Lk.QA8OUSvEkz45o.0u1'
-
     exec { 'create_web_user':
-      command     => "/usr/bin/mysql -u ${db_user} -p${db_password} icinga2_web -e \"insert into icingaweb_user VALUES ('${default_user}', 1, '${default_password}', NULL, NULL);\"",
+      command     => "/usr/bin/mysql -u ${db_user} -p${db_password} icinga2_web -e \"insert into icingaweb_user VALUES ('${admin_user}', 1, '${admin_password}', NULL, NULL);\"",
       refreshonly => true,
     }
 
